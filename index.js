@@ -27,8 +27,7 @@ io.on('connection', function (socket) {
 
   socket.on('switchScene', function (msg) {
     console.log('switchScene: ' + msg);
-    socket.broadcast.emit('switchScene', msg);  //to do comment
-    //io.emit('changeBDD', msg);
+    socket.broadcast.emit('switchScene', msg);
   });
 
 

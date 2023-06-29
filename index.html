@@ -35,10 +35,6 @@
         </style>
     </head>
     <body>
-        <!-- <div id="admincont" class=admin>
-            <input type="checkbox" id="admin" name="admin">
-            <label for="admin">Admin</label>
-          </div> -->
           <div class="adminCont">
           <button class="admin" id="adminButton" class="btn btn-primary">switch scene</button>
         </div>
@@ -68,6 +64,9 @@
             import { GUI } from "three/addons/libs/lil-gui.module.min.js";
             import Stats from "three/addons/libs/stats.module.js";
 
+
+            let dirLst = ["scene1", "scene2"];      //Add new scene folder name in this list
+
             let camera, scene, renderer, stats;
             let cube, sphere, torus, material;
 
@@ -78,7 +77,6 @@
             let texture;
             let texture2;
             let texturesLst = [];
-            let dirLst = ["scene1", "scene2"];
             let currTexture = 0;
 
             const rgbmUrls = [
@@ -105,8 +103,6 @@
 
                 window.addEventListener("resize", onWindowResized);
 
-                // stats = new Stats();
-                // document.body.appendChild(stats.dom);
 
                 camera = new THREE.PerspectiveCamera(
                     100,
@@ -127,41 +123,9 @@
                     .load(rgbmUrls))
 
 
-              /* 
-
-                texture = new THREE.CubeTextureLoader()
-                    .setPath("./cubemaps/scene1/")
-                    .load(rgbmUrls);
-
-
-                
-
-                scene.background = texture;
-
-                scene.environment = texture;
-
-*/
             updateScene()
     
-                
-
-                // const gui = new GUI();
-                // gui.add(renderer, "toneMappingExposure", 0, 2).name("exposure");
-
-
-          
-                //
-
                 controls = new OrbitControls(camera, renderer.domElement);
-
-
-//                 document.addEventListener(
-//   "click",
-//   switchScene);
-
-                // texture2 = new THREE.CubeTextureLoader()
-                //     .setPath("./cubemaps/scene2/")
-                //     .load(rgbmUrls);
 
             }
 
@@ -179,7 +143,6 @@
 
                 renderer.render(scene, camera);
 
-                // stats.update();
             }
 
             var adminButton = document.getElementById('adminButton');
@@ -199,24 +162,7 @@
                     .setPath("./cubemaps/" + dirLst[currTexture]+"/")
                     .load(rgbmUrls))
                 }
-                updateScene()
-
-                
-
-/*
-
-                if(isText1){
-                    scene.background = texture2;
-
-                    scene.environment = texture2;
-                }else{
-                    scene.background = texture;
-
-                    scene.environment = texture;
-                }
-                isText1 = !isText1;*/
-                // if($("#admin").is(":checked"))
-                //   socket.emit('switchScene', null);
+                updateScene()           
 
 
             }
