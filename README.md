@@ -16,3 +16,4 @@ https://github.com/immersive-web/webxr/issues/60#issuecomment-570271488
 https://stackoverflow.com/a/59568292
 
 
+le `demoCube.js` correspond au code du module JS à implementer
