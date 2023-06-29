@@ -49,14 +49,8 @@ function genCubemap() {
 
 
 
-    console.log(view.getLayers());
 
-
-    // let THREE = itowns.THREE;
-    let container; let stats; let
-        controls;
-
-    let camera; let scene; let
+    let camera; let
         renderer;
     // var faces = ["nx", "nz", "px", "ny", "py", "pz"];
     const faces = ['px', 'nz', 'nx', 'ny', 'py', 'pz'];
@@ -99,11 +93,10 @@ function genCubemap() {
                 view.mainLoop.renderingState == 0
             )
         )
-        // todo remove 0, crete new event
+        // todo remove 0, create new event
         { return; }
 
         renderer.render(view.scene, view.camera.camera3D);
-        // view.notifyChange(view.camera.camera3D);
 
         if (i > 0) {
             const dataURL = renderer.domElement.toDataURL('image/png');
@@ -113,15 +106,8 @@ function genCubemap() {
             zip.file(faces[i - 1] + '.png', data, { base64: true });
 
 
-            // Créer un élément a avec les attributs appropriés
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'image.png';
-            link.textContent = 'Télécharger ' + faces[i - 1];
-            //      document.body.appendChild(link);
-
             camera.rotateOnAxis(rotations[i - 1][0], rotations[i - 1][1] * -1.0);
-            // Ajouter les données binaires au fichier zip avec le nom de la face
+
         }
 
         if (i < 6) {
@@ -151,7 +137,7 @@ function genCubemap() {
         camera.near = 5;
 
         camera.updateProjectionMatrix();
-        // old view.mainLoop.addEventListener("command-queue-empty", cubemap3);
+
         view.mainLoop.addEventListener('command-queue-empty', toCube);
 
 
@@ -159,7 +145,7 @@ function genCubemap() {
         view.notifyChange(view.camera.camera3D);
     }
     function endCubemap() {
-        //   view.mainLoop.removeEventListener("command-queue-empty", cubemap3);
+
         view.mainLoop.removeEventListener('command-queue-empty', toCube);
 
         camera.near = near;
@@ -190,44 +176,23 @@ function genCubemap() {
 
 
     const layers = view.getLayers();
-    // Utiliser la méthode find() avec une fonction fléchée anonyme
+
     const pntsLayer = layers.find(o => o.name === 'fressines geredis');
 
     pntsLayer.onTileContentLoaded = function (tileContent) {
         tileContent.traverse(function (obj) {
             if (obj.isPoints) {
-                // obj.material.size = 1.0;
                 obj.material.size = 0.5;
             }
         });
     };
 }
 setTimeout(function () {
-    /*
-  var nuage_points_luxembourg = cesiumViewer.scene.primitives.get(0);
-nuage_points_luxembourg.pointCloudShading.attenuation = true;
-nuage_points_luxembourg.pointCloudShading.maximumAttenuation = 2;
-
-  $.getScript("https://dev.business-geografic.com/yann/Module 3D 2.0/storytelling_lidar.js");
-
-$.getScript("https://dev.business-geografic.com/yann/Module 3D 2.0/classification.js");
-
-$('#classification').show ();
-
-  $.getScript("https://dev.business-geografic.com/yann/Module 3D 2.0/lidar.js");
-
-  */
-
-
-
 
     $.getScript(
         'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js',
     );
 
-    /* $.getScript(
-    "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
-  ); */
 
     $.getScript(
         'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.js',
@@ -238,9 +203,6 @@ $('#classification').show ();
                 .get('mapService3D');
             mapService3D.getMap().then((mapView) => {
                 view = mapView.view;
-                // addAdministrativeLayer();
-                //  debugger;
-
                 genCubemap();
             });
         });
